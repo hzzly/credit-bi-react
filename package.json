@@ -68,6 +68,7 @@
     "core-js": "2",
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
+    "react-particle-line": "^0.1.8",
     "react-router-dom": "^5.0.1"
   },
   "husky": {

@@ -1,7 +1,38 @@
 .homeBox {
+  position: relative;
+  width: 100%;
+  min-width: 1920px;
   height: 100%;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 1080px;
+  font-size: 14px;
+  color: #37d1ff;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 6px;
+  padding: 6px;
+  z-index: 99;
+  .topLeft,
+  .topCenter,
+  .topRight,
+  .bottomLeft,
+  .bottomRight {
+    background: rgba(40, 47, 56, 0.5);
+  }
+  .topLeft {
+    grid-area: 1 / 1 / span 2 / span 3;
+    // display: flex;
+  }
+  .topCenter {
+    grid-area: 1 / 4 / span 2 / span 3;
+  }
+  .topRight {
+    grid-area: 1 / 7 / span 2 / span 2;
+  }
+  .bottomLeft {
+    grid-area: 3 / 1 / span 2 / span 6;
+  }
+  .bottomRight {
+    grid-area: 3 / 7 / span 2 / span 2;
+  }
 }
