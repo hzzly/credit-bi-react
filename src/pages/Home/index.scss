@@ -7,8 +7,8 @@
   font-size: 14px;
   color: #37d1ff;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: 50px repeat(4, 1fr);
   grid-gap: 6px;
   padding: 6px;
   z-index: 99;
@@ -20,19 +20,23 @@
     background: rgba(40, 47, 56, 0.5);
   }
   .topLeft {
-    grid-area: 1 / 1 / span 2 / span 3;
+    grid-area: 2 / 1 / span 2 / span 3;
     // display: flex;
   }
   .topCenter {
-    grid-area: 1 / 4 / span 2 / span 3;
+    grid-area: 2 / 4 / span 2 / span 3;
+    // .num {
+    //   width: 100%;
+    //   height: 100px;
+    // }
   }
   .topRight {
-    grid-area: 1 / 7 / span 2 / span 2;
+    grid-area: 2 / 7 / span 2 / span 3;
   }
   .bottomLeft {
-    grid-area: 3 / 1 / span 2 / span 6;
+    grid-area: 4 / 1 / span 2 / span 6;
   }
   .bottomRight {
-    grid-area: 3 / 7 / span 2 / span 2;
+    grid-area: 4 / 7 / span 2 / span 3;
   }
 }

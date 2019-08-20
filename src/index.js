@@ -2,8 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
+import io from 'socket.io-client';
 import Router from './router';
 import './global.scss';
+
+const socket = io.connect('/');
+socket.on('message', data => {
+  console.log(data);
+});
 
 function render(Component) {
   ReactDOM.render(

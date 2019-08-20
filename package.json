@@ -66,10 +66,16 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "core-js": "2",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
+    "echarts-gl": "^1.1.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-particle-line": "^0.1.8",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "husky": {
     "hooks": {
