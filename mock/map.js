@@ -78,20 +78,21 @@ function getAddress(mapData, num) {
 
 module.exports = function getMapData() {
   const mapData = mockMapData;
+  const geoCoordMap = mockGeoCoordMap;
   const runidx = Math.floor(Math.random() * 2);
   const typeidx = Math.floor(Math.random() * 3);
   const dataidx = Math.floor(Math.random() * 32);
   const ranval = Math.floor(Math.random() * 10);
   mapData[dataidx].value += ranval;
   const valarr = geoCoordMap[mapData[dataidx].name];
-  valarr.push(ranval);
   return {
     mapData,
     message: {
       username: getName(runidx),
       telphone: getTel(),
       address: getAddress(mapData, dataidx, typeidx),
-      value: valarr,
+      money: ranval,
+      value: [...valarr, ranval],
     },
   };
 };
@@ -239,7 +240,7 @@ const mockMapData = [
   },
 ];
 
-const geoCoordMap = {
+const mockGeoCoordMap = {
   上海: [119.1803, 31.2891],
   福建: [119.4543, 25.9222],
   重庆: [108.384366, 30.439702],

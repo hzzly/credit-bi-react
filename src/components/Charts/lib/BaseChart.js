@@ -15,18 +15,13 @@ export default class BaseChart extends PureComponent {
   };
 
   componentDidMount() {
-    const { runAction, runCallback } = this.props;
+    const { runAction } = this.props;
 
     if (this.chartRef && runAction) {
       const chartIns = this.chartRef.getEchartsInstance();
       window.setTimeout(() => {
         runAction(chartIns);
       }, 300);
-    }
-
-    if (this.chartRef && runCallback) {
-      const chartIns = this.chartRef.getEchartsInstance();
-      runCallback(chartIns);
     }
   }
 

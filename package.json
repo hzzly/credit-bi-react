@@ -17,6 +17,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
@@ -73,7 +74,11 @@
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-particle-line": "^0.1.8",
+    "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.5",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
   },

@@ -2,21 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
-import io from 'socket.io-client';
+import { Provider } from 'react-redux';
 import Router from './router';
+import configStore from './store';
 import './global.scss';
 
-const socket = io.connect('/');
-socket.on('message', data => {
-  console.log(data);
-});
+const store = configStore();
 
 function render(Component) {
   ReactDOM.render(
     <AppContainer>
-      <BrowserRouter>
-        <Component />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>
     </AppContainer>,
     document.getElementById('root')
   );
