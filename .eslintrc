@@ -7,7 +7,10 @@
   },
   "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   },
   "extends": ["airbnb", "prettier"],
   "rules": {
