@@ -16,16 +16,17 @@ const effectScatter = [
 
 const effectScatterSeries = effectScatter.map((item, index) => {
   return {
+    name: '贷款金额',
     type: 'effectScatter',
     coordinateSystem: 'geo',
     z: 10 + index,
     data: [],
-    symbolSize: 10,
+    symbolSize: 6,
     label: {
       normal: {
         show: true,
         formatter(params) {
-          return `{fline|客户：${params.data.username}  ${params.data.telphone}}\n{tline|在 ${params.data.address} 发起贷款${params.data.money}元}`;
+          return `{fline|客户：${params.data.username}  ${params.data.telphone}}\n{tline|在 ${params.data.address} 发起贷款${params.data.money}万元}`;
         },
         position: 'top',
         backgroundColor: item.labelBackgroundColor,
@@ -74,13 +75,17 @@ export function genOverviewMap(cmap, message) {
     visualMap: {
       type: 'continuous',
       min: 0,
-      max: max[0] && max[0].value,
+      max: max[0] && max[0].value.toFixed(2),
       left: 'center',
       bottom: '10',
       orient: 'horizontal',
       itemWidth: 15,
-      itemHeight: 300,
+      itemHeight: 200,
+      text: [max[0] && max[0].value.toFixed(2), 0],
       color: ['#374e90', '#598ebf'],
+      textStyle: {
+        color: '#999',
+      },
     },
     series: [
       ...effectScatterSeries,
@@ -119,14 +124,106 @@ export function genOverviewMap(cmap, message) {
           },
         },
         itemStyle: {
-          normal: {
-            borderColor: '#111',
-          },
           emphasis: {
-            areaColor: '#253b69',
+            areaColor: '#2c426f',
           },
         },
         data: cmap.map(t => ({ name: t.name, value: t.value })),
+      },
+    ],
+  };
+}
+
+export function genOverviewBar(cmap) {
+  const sortData = cmap.sort((a, b) => b.value - a.value);
+  const sum = cmap.reduce((prev, cur) => cur.value + prev, 0);
+  console.log(sum);
+  const top10 = sortData
+    .filter((f, index) => index < 10)
+    .map(item => {
+      return {
+        ...item,
+        value: (item.value / sum).toFixed(2) * 100,
+      };
+    });
+  return {
+    xAxis: {
+      show: false,
+    },
+    yAxis: {
+      name: 'Top 10排行',
+      nameLocation: 'start',
+      nameTextStyle: {
+        color: '#ffffff',
+        fontSize: '14',
+        align: 'left',
+      },
+    },
+    grid: {
+      right: 30,
+      width: '50%',
+    },
+    yCategory: top10.map((item, index) => `${index}${item.name}`),
+    series: [
+      {
+        name: '贷款金额',
+        roam: false,
+        visualMap: false,
+        z: 2,
+        barMaxWidth: 10,
+        barGap: 0,
+        itemStyle: {
+          normal: {
+            color(params) {
+              // build a color map as your need.
+              const colorList = [
+                {
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: '#FFD119', // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#FFAC4C', // 100% 处的颜色
+                    },
+                  ],
+                },
+                {
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: '#00C0FA', // 0% 处的颜色
+                    },
+                    {
+                      offset: 1,
+                      color: '#2F95FA', // 100% 处的颜色
+                    },
+                  ],
+                },
+              ];
+              if (params.dataIndex < 3) {
+                return colorList[0];
+              } else {
+                return colorList[1];
+              }
+            },
+            barBorderRadius: 15,
+          },
+        },
+        label: {
+          normal: {
+            show: true,
+            position: 'right',
+            distance: 10,
+            textStyle: {
+              color: '#eee',
+              fontSize: '12',
+            },
+            formatter: '{c}%',
+          },
+        },
+        data: top10,
       },
     ],
   };
