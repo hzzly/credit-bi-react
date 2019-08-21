@@ -82,7 +82,7 @@ module.exports = function getMapData() {
   const runidx = Math.floor(Math.random() * 2);
   const typeidx = Math.floor(Math.random() * 3);
   const dataidx = Math.floor(Math.random() * 32);
-  const ranval = Math.floor(Math.random() * 10);
+  const ranval = Number((Math.random() * 10).toFixed(1));
   mapData[dataidx].value += ranval;
   const valarr = geoCoordMap[mapData[dataidx].name];
   return {
@@ -100,143 +100,143 @@ module.exports = function getMapData() {
 const mockMapData = [
   {
     name: '北京',
-    value: 9000,
+    value: 92,
   },
   {
     name: '天津',
-    value: 8000,
+    value: 83,
   },
   {
     name: '上海',
-    value: 10000,
+    value: 98,
   },
   {
     name: '重庆',
-    value: 7000,
+    value: 65,
   },
   {
     name: '河北',
-    value: 5000,
+    value: 58,
   },
   {
     name: '河南',
-    value: 5000,
+    value: 56,
   },
   {
     name: '云南',
-    value: 2000,
+    value: 27,
   },
   {
     name: '辽宁',
-    value: 6000,
+    value: 69,
   },
   {
     name: '黑龙江',
-    value: 4000,
+    value: 42,
   },
   {
     name: '湖南',
-    value: 6000,
+    value: 66,
   },
   {
     name: '安徽',
-    value: 3000,
+    value: 38,
   },
   {
     name: '山东',
-    value: 6000,
+    value: 62,
   },
   {
     name: '新疆',
-    value: 1000,
+    value: 12,
   },
   {
     name: '江苏',
-    value: 8000,
+    value: 89,
   },
   {
     name: '浙江',
-    value: 9000,
+    value: 94,
   },
   {
     name: '江西',
-    value: 5000,
+    value: 57,
   },
   {
     name: '湖北',
-    value: 7000,
+    value: 71,
   },
   {
     name: '广西',
-    value: 3000,
+    value: 35,
   },
   {
     name: '甘肃',
-    value: 3000,
+    value: 36,
   },
   {
     name: '山西',
-    value: 5000,
+    value: 53,
   },
   {
     name: '内蒙古',
-    value: 2000,
+    value: 22,
   },
   {
     name: '陕西',
-    value: 4000,
+    value: 45,
   },
   {
     name: '吉林',
-    value: 5000,
+    value: 51,
   },
   {
     name: '福建',
-    value: 6000,
+    value: 68,
   },
   {
     name: '贵州',
-    value: 3000,
+    value: 36,
   },
   {
     name: '广东',
-    value: 8000,
+    value: 89,
   },
   {
     name: '青海',
-    value: 2000,
+    value: 20,
   },
   {
     name: '西藏',
-    value: 1000,
+    value: 8,
   },
   {
     name: '四川',
-    value: 7000,
+    value: 64,
   },
   {
     name: '宁夏',
-    value: 2000,
+    value: 24,
   },
   {
     name: '海南',
-    value: 2000,
+    value: 27,
   },
   {
     name: '台湾',
-    value: 1000,
+    value: 13,
   },
   {
     name: '香港',
-    value: 1000,
+    value: 18,
   },
   {
     name: '澳门',
-    value: 1000,
+    value: 20,
   },
   {
     name: '南海诸岛',
-    value: 100,
+    value: 2,
   },
 ];
 

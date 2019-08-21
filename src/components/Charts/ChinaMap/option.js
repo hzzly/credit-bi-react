@@ -14,7 +14,9 @@ export default {
       return `
         <p style="text-align:left;font-size:14px;line-height:20px">${params.name}</p>
         <p style="text-align:left;line-height:18px">
-          ${params.seriesName}：<span>${params.value}</span>
+          ${params.seriesName}：<span>${
+        Array.isArray(params.value) ? params.value[2].toFixed(2) : params.value.toFixed(2)
+      }万元</span>
         </p>
       `;
     },
@@ -87,7 +89,15 @@ export default {
     },
     itemStyle: {
       areaColor: '#323c48',
-      borderColor: '#111',
+      borderColor: '#00ffea',
+      // borderColor: "#a7e4e6", //省市边界线
+      // shadowColor: 'rgba(166, 230, 236, 0.3)',
+      // shadowOffsetX: 0,
+      // shadowOffsetY: 0,
+      // shadowBlur: 120,
+      // borderWidth: 2,
+      // shadowColor: '#00ffea',
+      // shadowBlur: 5
     },
     emphasis: {
       itemStyle: {
@@ -96,5 +106,4 @@ export default {
     },
   },
   series: [],
-  // series: effectScatterSeries,
 };

@@ -30,20 +30,28 @@ app.use(hotMiddleware);
 // 设置访问静态文件的路径
 app.use(express.static(DIST_DIR));
 
+let t = null;
 io.on('connection', socket => {
-  socket.emit('message', map());
-
-  setInterval(() => {
+  socket.on('message', () => {
     socket.emit('message', map());
-  }, 5000);
 
-  socket.on('message', data => {
-    socket.broadcast.emit('message', [
-      {
-        ...data,
-      },
-    ]);
+    if (t) {
+      clearInterval(t);
+      t = null;
+    }
+
+    t = setInterval(() => {
+      socket.emit('message', map());
+    }, 5000);
   });
+});
+
+io.on('disconnect', () => {
+  console.log('disconnect');
+  if (t) {
+    clearInterval(t);
+    t = null;
+  }
 });
 
 server.listen(port, () => {
