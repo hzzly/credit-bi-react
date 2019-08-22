@@ -1,0 +1,44 @@
+.numberBox {
+  display: flex;
+  color: #fff;
+  font-size: 30px;
+
+  .numberItem {
+    // width: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    // width: 0.18rem;
+    // height: 0.24rem;
+    // line-height: 0.24rem;
+    display: inline-block;
+    overflow: hidden;
+
+    &.comma {
+      width: 18px;
+      font-size: 30px;
+      text-align: left;
+    }
+
+    &.active {
+      .num {
+        animation: move 1.5s;
+        animation-fill-mode: forwards; // 让动画结束后保持最后一帧
+      }
+    }
+
+    .num {
+      display: block;
+      transform: translateY(0%);
+    }
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
