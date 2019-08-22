@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import io from 'socket.io-client';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -8,6 +9,8 @@ import configStore from './store';
 import './global.scss';
 
 const store = configStore();
+const socket = io.connect('/');
+store.dispatch({ type: 'setSocket', payload: { socket } });
 
 function render(Component) {
   ReactDOM.render(
