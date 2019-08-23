@@ -1,60 +1,6 @@
 // import { convertData } from './util';
-const effectScatter = [
-  {
-    labelBackgroundColor: 'rgba(254,174,33,.8)',
-    itemStyleColor: '#feae21',
-  },
-  {
-    labelBackgroundColor: 'rgba(233,63,66,.9)',
-    itemStyleColor: '#e93f42',
-  },
-  {
-    labelBackgroundColor: 'rgba(8,186,236,.8)',
-    itemStyleColor: '#08baec',
-  },
-];
-
-const effectScatterSeries = effectScatter.map((item, index) => {
-  return {
-    name: '贷款金额',
-    type: 'effectScatter',
-    coordinateSystem: 'geo',
-    z: 10 + index,
-    data: [],
-    symbolSize: 6,
-    label: {
-      normal: {
-        show: true,
-        formatter(params) {
-          return `{fline|客户：${params.data.username}  ${params.data.telphone}}\n{tline|在 ${params.data.address} 发起贷款${params.data.money}万元}`;
-        },
-        position: 'top',
-        backgroundColor: item.labelBackgroundColor,
-        padding: [0, 0],
-        borderRadius: 3,
-        lineHeight: 32,
-        color: '#fff',
-        rich: {
-          fline: {
-            padding: [0, 10, 10, 10],
-            color: '#fff',
-          },
-          tline: {
-            padding: [10, 10, 0, 10],
-            color: '#fff',
-          },
-        },
-      },
-      emphasis: {
-        show: true,
-      },
-    },
-    itemStyle: {
-      color: item.itemStyleColor,
-    },
-  };
-});
 let i = 0;
+const effectScatterSeries = effectScatter();
 
 export function genOverviewMap(cmap, message) {
   const max = cmap.sort((a, b) => b.value - a.value);
@@ -77,12 +23,15 @@ export function genOverviewMap(cmap, message) {
       min: 0,
       max: max[0] && max[0].value.toFixed(2),
       left: 'center',
-      bottom: '10',
+      bottom: '30',
       orient: 'horizontal',
       itemWidth: 15,
       itemHeight: 200,
       text: [max[0] && max[0].value.toFixed(2), 0],
-      color: ['#374e90', '#598ebf'],
+      inRange: {
+        color: ['#345f7b', '#081523'], // 蓝绿
+      },
+      // color: ['#04387b', '#467bc0'],
       textStyle: {
         color: '#999',
       },
@@ -114,9 +63,11 @@ export function genOverviewMap(cmap, message) {
         roam: false,
         label: {
           normal: {
+            formatter: '{b}',
+            position: 'right',
             show: false,
             textStyle: {
-              color: '#333',
+              color: '#fff',
             },
           },
           emphasis: {
@@ -124,8 +75,13 @@ export function genOverviewMap(cmap, message) {
           },
         },
         itemStyle: {
+          normal: {
+            // color: '#fff',
+            // areaColor: '#023677',
+            borderColor: '#0692a4',
+          },
           emphasis: {
-            areaColor: '#2c426f',
+            areaColor: '#4499d0',
           },
         },
         data: cmap.map(t => ({ name: t.name, value: t.value })),
@@ -137,7 +93,6 @@ export function genOverviewMap(cmap, message) {
 export function genOverviewBar(cmap) {
   const sortData = cmap.sort((a, b) => b.value - a.value);
   const sum = cmap.reduce((prev, cur) => cur.value + prev, 0);
-  console.log(sum);
   const top10 = sortData
     .filter((f, index) => index < 10)
     .map(item => {
@@ -147,6 +102,12 @@ export function genOverviewBar(cmap) {
       };
     });
   return {
+    sum: sum.toFixed(2),
+    tooltip: {
+      formatter: params => {
+        return `${params.name}：${params.data.value}%`;
+      },
+    },
     xAxis: {
       show: false,
     },
@@ -227,4 +188,62 @@ export function genOverviewBar(cmap) {
       },
     ],
   };
+}
+
+function effectScatter() {
+  const effectScatterArr = [
+    {
+      labelBackgroundColor: 'rgba(254,174,33,.8)',
+      itemStyleColor: '#feae21',
+    },
+    {
+      labelBackgroundColor: 'rgba(233,63,66,.9)',
+      itemStyleColor: '#e93f42',
+    },
+    {
+      labelBackgroundColor: 'rgba(8,186,236,.8)',
+      itemStyleColor: '#08baec',
+    },
+  ];
+
+  return effectScatterArr.map((item, index) => {
+    return {
+      name: '贷款金额',
+      type: 'effectScatter',
+      coordinateSystem: 'geo',
+      z: 10 + index,
+      data: [],
+      symbolSize: 6,
+      label: {
+        normal: {
+          show: true,
+          formatter(params) {
+            return `{fline|客户：${params.data.username}  ${params.data.telphone}}\n{tline|在 ${params.data.address} 发起贷款${params.data.money}万元}`;
+          },
+          position: 'top',
+          backgroundColor: item.labelBackgroundColor,
+          padding: [0, 0],
+          borderRadius: 3,
+          lineHeight: 32,
+          color: '#fff',
+          rich: {
+            fline: {
+              padding: [0, 10, 10, 10],
+              color: '#fff',
+            },
+            tline: {
+              padding: [10, 10, 0, 10],
+              color: '#fff',
+            },
+          },
+        },
+        emphasis: {
+          show: true,
+        },
+      },
+      itemStyle: {
+        color: item.itemStyleColor,
+      },
+    };
+  });
 }

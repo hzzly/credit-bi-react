@@ -32,7 +32,7 @@ export default class index extends PureComponent {
           <>
             <div className={styles.numBox}>
               <div className={styles.title}>当前累计贷款金额</div>
-              <ScrollNumber numbers={sum * 1000} style={{ color: '#e8bb3f', fontSize: 40 }} />
+              <ScrollNumber numbers={sum * 1000} style={{ color: '#e8bb3f', fontSize: 50 }} />
             </div>
             <ChinaMap
               data={chinaMapData}
