@@ -35,6 +35,17 @@ export function moment(timestamps = null) {
   };
 }
 
+/**
+ * @description 格式化人民币 eg:10000 => 10,000.00
+ * @param {*} money
+ */
+export function formatMoney(money, decimal = 2) {
+  if (Number(money) === 0 || Number.isNaN(Number(money))) return '0.00';
+  return Number(money)
+    .toFixed(decimal)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 export function convertData(data = []) {
   const res = [];
   for (const item of data) {
