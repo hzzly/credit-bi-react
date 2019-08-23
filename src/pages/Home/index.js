@@ -1,77 +1,32 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
 import ReactParticleLine from 'react-particle-line';
-import ChinaMap from '@/components/Charts/ChinaMap';
-// import Pie from '@/components/Charts/Pie';
-// import Line from '@/components/Charts/Line';
-import Bar from '@/components/Charts/Bar';
-import { genOverviewMap, genOverviewBar } from '@/utils/genMapData';
+import TopCenter from '@/pages/TopCenter';
 
 import styles from './index.scss';
 
-@connect(({ map }) => ({
-  map,
+@connect(({ app }) => ({
+  app,
 }))
 export default class index extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      socket: null,
-    };
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    const socket = io.connect('/');
-    socket.emit('message');
-    socket.on('message', data => {
-      dispatch({ type: 'saveMap', payload: data });
-    });
-    this.setState({ socket });
-  }
-
   componentWillUnmount() {
-    const { socket } = this.state;
+    const {
+      dispatch,
+      app: { socket },
+    } = this.props;
     if (socket) {
       socket.disconnect();
-      this.setState({ socket: null });
+      dispatch({ type: 'setScoket', payload: { socket: null } });
     }
   }
 
   render() {
-    const { map } = this.props;
-    const { mapData, message } = map;
-    const chinaMapData = genOverviewMap(mapData, message);
-    const mapBarData = genOverviewBar(mapData);
-    console.log(mapBarData);
-    // 'e8bb3f'
     return (
       <ReactParticleLine>
         <div className={styles.homeBox}>
           <div className={styles.topLeft}>{/* <Pie data={pieData} /> */}</div>
           <div className={styles.topCenter}>
-            {mapData.length > 0 && (
-              <Fragment>
-                <ChinaMap
-                  data={chinaMapData}
-                  style={{ height: '80%', width: '80%', top: '20%', left: '-5%' }}
-                />
-                <Bar
-                  data={mapBarData}
-                  style={{
-                    position: 'absolute',
-                    height: '80%',
-                    top: '20%',
-                    right: '2%',
-                    width: '30%',
-                  }}
-                />
-              </Fragment>
-            )}
-            {/* { && (<ChinaMap data={chinaMapData} style={{ height: '80%', top: '20%' }} />)} */}
-            {/* {mapData.length > 0 && <Bar data={mapBarData} />} */}
-            {/* <div className={styles.num} /> */}
+            <TopCenter />
           </div>
           <div className={styles.topRight}>{/* <Line data={{}} /> */}</div>
           <div className={styles.bottomLeft} />
