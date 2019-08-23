@@ -43,8 +43,8 @@ export default class index extends PureComponent {
               }`}
               key={item + i} // eslint-disable-line
             >
-              <span className={styles.num}>{oldNumber[index]}</span>
-              <span className={styles.num}>{newNumber[index]}</span>
+              <span className={styles.num}>{oldNumber[i]}</span>
+              <span className={styles.num}>{newNumber[i]}</span>
             </li>
           );
         })}

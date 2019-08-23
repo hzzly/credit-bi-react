@@ -88,6 +88,13 @@ export default {
       },
     },
     itemStyle: {
+      // normal: {
+      //   areaColor: '#023677',
+      //   borderColor: '#1180c7',
+      // },
+      // emphasis: {
+      //   areaColor: '#4499d0',
+      // }
       areaColor: '#323c48',
       borderColor: '#00ffea',
       // borderColor: "#a7e4e6", //省市边界线
@@ -99,11 +106,11 @@ export default {
       // shadowColor: '#00ffea',
       // shadowBlur: 5
     },
-    emphasis: {
-      itemStyle: {
-        areaColor: '#2a333d',
-      },
-    },
+    // emphasis: {
+    //   itemStyle: {
+    //     areaColor: '#2a333d',
+    //   },
+    // },
   },
   series: [],
 };
