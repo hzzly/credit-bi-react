@@ -48,9 +48,9 @@ export default class BaseChart extends PureComponent {
 function getStyle(style) {
   return Object.assign(
     {
-      // position: 'relative',
-      width: '100%',
-      height: '100%',
+      position: 'relative',
+      // width: '100%',
+      // height: '100%',
       // tranform: 'translate3d(0, 0, 0)',
     },
     style
