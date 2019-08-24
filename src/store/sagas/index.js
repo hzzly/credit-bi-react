@@ -3,9 +3,11 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
 // import { getMapData } from './map';
 import { saveMap } from '../actions/map';
+import { saveLoan } from '../actions/loan';
 import { setSocket } from '../actions/app';
 
 export default function* rootSaga() {
   yield takeLatest('setSocket', setSocket);
   yield takeEvery('saveMap', saveMap);
+  yield takeEvery('saveLoan', saveLoan);
 }
