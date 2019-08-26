@@ -1,10 +1,11 @@
 .card {
+  position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
   flex-direction: column;
   padding: 14px;
-  overflow: hidden;
+  // overflow: hidden;
   .head {
     // display: flex;
     // justify-content: space-between;

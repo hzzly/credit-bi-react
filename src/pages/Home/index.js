@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import ReactParticleLine from 'react-particle-line';
 import TopCenter from '@/pages/TopCenter';
+import TopRight from '@/pages/TopRight';
 
 import styles from './index.scss';
 
@@ -24,12 +25,16 @@ export default class index extends PureComponent {
     return (
       <ReactParticleLine>
         <div className={styles.homeBox}>
+          <div className={styles.herder}></div>
           <div className={styles.topLeft}>{/* <Pie data={pieData} /> */}</div>
           <div className={styles.topCenter}>
             <TopCenter />
           </div>
-          <div className={styles.topRight}>{/* <Line data={{}} /> */}</div>
+          <div className={styles.topRight}>
+            <TopRight />
+          </div>
           <div className={styles.bottomLeft} />
+          <div className={styles.bottomCenter} />
           <div className={styles.bottomRight} />
         </div>
       </ReactParticleLine>

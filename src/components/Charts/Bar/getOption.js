@@ -6,11 +6,15 @@ function seriesCreator(series) {
 }
 
 export default function(option, data) {
-  const { xAxis, yAxis, yCategory, series = [], ...rest } = data;
+  const { tooltip, xAxis, yAxis, yCategory, series = [], ...rest } = data;
 
   return {
     ...option,
     xAxis,
+    tooltip: {
+      ...option.tooltip,
+      ...tooltip,
+    },
     yAxis: {
       ...option.yAxis,
       ...yAxis,
