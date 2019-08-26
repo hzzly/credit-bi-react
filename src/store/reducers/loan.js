@@ -19,6 +19,14 @@ const defaultState = {
     new: [],
     prenew: [],
   },
+  ageStatistical: {
+    man: [],
+    women: [],
+  },
+  ageAverage: {
+    age: [],
+    average: [],
+  },
 };
 
 export default (state = defaultState, action) => {

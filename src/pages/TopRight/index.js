@@ -7,6 +7,8 @@ import Labels from '@/components/Labels';
 import SvgIcon from '@/components/SvgIcon';
 import { genLoanStatistical, genAgeStatistical, genAgeAverage } from '@/utils/genChartData';
 
+import styles from './index.scss';
+
 SvgIcon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_624956_exv4sjmfz1b.js',
 });
@@ -52,8 +54,6 @@ const loanLabel = [
   },
 ];
 
-import styles from './index.scss';
-
 @connect(({ loan, app }) => ({
   loan,
   socket: app.socket,
@@ -83,7 +83,8 @@ export default class index extends PureComponent {
                 <span>客户数量</span>
                 <span className={styles.percent}>
                   {' '}
-                  [<SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
+                  [
+                  <SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
                   {`${overview.custCountComp}%`}]
                 </span>
               </div>
@@ -94,7 +95,8 @@ export default class index extends PureComponent {
                 <span>贷款笔数</span>
                 <span className={styles.percent}>
                   {' '}
-                  [<SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
+                  [
+                  <SvgIcon icon="icon-icon-caret-up" className={styles.caretUpIcon} />
                   {`${overview.loanCountComp}%`}]
                 </span>
               </div>
@@ -105,7 +107,8 @@ export default class index extends PureComponent {
                 <span>逾期金额</span>
                 <span className={styles.percent}>
                   {' '}
-                  [<SvgIcon icon="icon-caret-down" className={styles.caretDownIcon} />
+                  [
+                  <SvgIcon icon="icon-caret-down" className={styles.caretDownIcon} />
                   {`${overview.overdueAmtComp}%`}]
                 </span>
               </div>

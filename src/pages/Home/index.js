@@ -25,7 +25,7 @@ export default class index extends PureComponent {
     return (
       <ReactParticleLine>
         <div className={styles.homeBox}>
-          <div className={styles.herder}></div>
+          <div className={styles.herder} />
           <div className={styles.topLeft}>{/* <Pie data={pieData} /> */}</div>
           <div className={styles.topCenter}>
             <TopCenter />
