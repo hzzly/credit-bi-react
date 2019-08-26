@@ -294,9 +294,9 @@ export function genAgeAverage(data) {
           show: false,
         },
         areaStyle: {
-          //区域填充样式
+          // 区域填充样式
           normal: {
-            //线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+            // 线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
             color: new echarts.graphic.LinearGradient(
               0,
               0,
@@ -314,8 +314,8 @@ export function genAgeAverage(data) {
               ],
               false
             ),
-            shadowColor: 'rgba(53,142,215, 0.9)', //阴影颜色
-            shadowBlur: 20, //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+            shadowColor: 'rgba(53,142,215, 0.9)', // 阴影颜色
+            shadowBlur: 20, // shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
           },
         },
         data: data.average && data.average.map(t => t.value),
@@ -336,8 +336,8 @@ export function genAgeAverage(data) {
         // },
         itemStyle: {
           normal: {
-            color: function(params) {
-              var colorList = [
+            color(params) {
+              const colorList = [
                 '#0ec1ff',
                 '#10cdff',
                 '#12daff',

@@ -32,6 +32,19 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
+              // import: (parsedImport) => {
+              //   // parsedImport.url - url of `@import`
+              //   // parsedImport.media - media query of `@import`
+              //   // resourcePath - path to css file
+
+              //   // Don't handle `style.css` import
+              //   console.log(parsedImport.url.includes('animate.css'))
+              //   if (parsedImport.url.includes('animate.css')) {
+              //     return false;
+              //   }
+
+              //   return true;
+              // },
               modules: {
                 localIdentName: '[local]_[hash:base64:5]',
               },
