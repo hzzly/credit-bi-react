@@ -98,21 +98,22 @@ export function genOverviewBar(cmap) {
     .map(item => {
       return {
         ...item,
-        value: (item.value / sum).toFixed(2) * 100,
+        // value: (item.value / sum).toFixed(2) * 100,
+        value: item.value.toFixed(2),
       };
     });
   return {
     sum: sum.toFixed(2),
     tooltip: {
       formatter: params => {
-        return `${params.name}：${params.data.value}%`;
+        return `${params.name}：${params.data.value}`;
       },
     },
     xAxis: {
       show: false,
     },
     yAxis: {
-      name: 'Top 10排行',
+      name: 'Top 10排行（万元）',
       nameLocation: 'start',
       nameTextStyle: {
         color: '#ffffff',
@@ -121,7 +122,7 @@ export function genOverviewBar(cmap) {
       },
     },
     grid: {
-      right: 30,
+      right: 50,
       width: '50%',
     },
     yCategory: top10.map((item, index) => `${index}${item.name}`),
@@ -181,7 +182,7 @@ export function genOverviewBar(cmap) {
               color: '#eee',
               fontSize: '12',
             },
-            formatter: '{c}%',
+            formatter: '{c}',
           },
         },
         data: top10,

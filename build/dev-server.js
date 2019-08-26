@@ -5,6 +5,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.dev.conf.js');
 const map = require('../mock/map');
+const loan = require('../mock/loan');
 
 const complier = webpack(config); // 编译器，编译器执行一次就会重新打包一下代码
 const app = express(); // 生成一个实例
@@ -43,6 +44,10 @@ io.on('connection', socket => {
     t = setInterval(() => {
       socket.emit('message', map());
     }, 5000);
+  });
+
+  socket.on('loan', () => {
+    socket.emit('loan', loan());
   });
 });
 
