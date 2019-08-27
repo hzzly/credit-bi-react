@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ReactParticleLine from 'react-particle-line';
 import TopCenter from '@/pages/TopCenter';
 import TopRight from '@/pages/TopRight';
+import BottomRight from '@/pages/BottomRight';
 
 import styles from './index.scss';
 
@@ -35,7 +36,9 @@ export default class index extends PureComponent {
           </div>
           <div className={styles.bottomLeft} />
           <div className={styles.bottomCenter} />
-          <div className={styles.bottomRight} />
+          <div className={styles.bottomRight}>
+            <BottomRight />
+          </div>
         </div>
       </ReactParticleLine>
     );

@@ -66,6 +66,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "animate.css": "^3.7.2",
     "core-js": "2",
     "echarts": "^4.2.1",
     "echarts-for-react": "^2.0.15-beta.0",
