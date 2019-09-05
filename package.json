@@ -74,7 +74,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
-    "react-particle-line": "^0.1.8",
+    "react-particle-line": "^0.1.9",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
