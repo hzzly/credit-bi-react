@@ -7439,10 +7439,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-particle-line@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.npmjs.org/react-particle-line/-/react-particle-line-0.1.8.tgz#4cb7874c2e351a778cb6305fc34491a0b85bf6f5"
-  integrity sha512-Dgu+6QK9q9Xc07bAIvA0o58j8+uw5y5ZMjqTTQaDyR6g4TPbhi6r0WnTUokAqG5dRnCKV6KyuEhC+zH3MEu6jQ==
+react-particle-line@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.npmjs.org/react-particle-line/-/react-particle-line-0.1.9.tgz#ec3fb658261b5420b121a817950c3c8a931017cd"
+  integrity sha512-N5Uj5vSBMS8Riy9abiGadleJRUqlmfy3eMcpCO/7A/I/z9hm5NHS5hKAtP9nzThKiBEa3FZ+12PBlRacdXQwcA==
   dependencies:
     prop-types "^15.7.2"
     react "^16.8.6"
