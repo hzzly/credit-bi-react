@@ -1,16 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import io from 'socket.io-client';
+import { socket } from './utils/socket';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { SAVE_LOAN, SAVE_MAP } from './store/types';
 import Router from './router';
 import configStore from './store';
 import './global.scss';
 
 const store = configStore();
-const socket = io.connect('/');
-store.dispatch({ type: 'setSocket', payload: { socket } });
+socket.init({
+  wsHost: '/',
+  onConn: () => {
+    socket.wsEmit({ name: 'msg' });
+    socket.wsEmit({ name: 'loan' });
+    socket.wsEmit({ name: 'userConver' });
+    socket.wsEmit({ name: 'product' });
+    socket.wsEmit({ name: 'cooperator' });
+  },
+  onReceiveMsg: data => {
+    const contentTypeMap = {
+      msg: SAVE_MAP,
+      loan: SAVE_LOAN,
+      userConver: SAVE_LOAN,
+      product: SAVE_LOAN,
+      cooperator: SAVE_LOAN,
+    };
+
+    const action = contentTypeMap[data.contentType];
+
+    if (action) {
+      store.dispatch({ type: action, payload: { ...data.data } });
+    } else {
+      console.error(`ws resp ${data.contentType} not match...`);
+    }
+  },
+  onDisconn() {},
+});
+
+socket.initWs();
 
 function render(Component) {
   ReactDOM.render(
