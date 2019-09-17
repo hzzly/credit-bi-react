@@ -15,7 +15,7 @@ const columns = [
   {
     title: '时间',
     dataIndex: 'time',
-    width: 140,
+    width: 150,
   },
   {
     title: '操作',

@@ -22,11 +22,11 @@
     // overflow: hidden;
     background: rgba(40, 47, 56, 0.5);
   }
-  .herder {
-    grid-area: 1 / 1 / span 1 / span 3;
+  .header {
+    grid-area: 1 / 1 / span 1 / span 9;
   }
   .topLeft {
-    grid-area: 2 / 1 / span 5 / span 2;
+    grid-area: 2 / 1 / span 4 / span 2;
     // display: flex;
   }
   .topCenter {
@@ -37,7 +37,7 @@
     grid-area: 2 / 7 / span 5 / span 3;
   }
   .bottomLeft {
-    grid-area: 7 / 1 / span 3 / span 2;
+    grid-area: 6 / 1 / span 4 / span 2;
   }
   .bottomCenter {
     grid-area: 7 / 3 / span 3 / span 4;
