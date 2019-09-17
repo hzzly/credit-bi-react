@@ -1,0 +1,43 @@
+.channel {
+  .title {
+    line-height: 30px;
+  }
+  .column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    flex: 0 0 auto;
+    font-size: 12px;
+    height: 40px;
+    .label {
+      width: 45px;
+      color: #ccc;
+    }
+    .bars {
+      position: relative;
+      top: -6px;
+      width: calc(100% - 90px);
+      cursor: auto;
+      .inner {
+        position: absolute;
+        background: rgba(151, 136, 136, 0.4);
+        width: 100%;
+        height: 12px;
+        border-radius: 8px;
+      }
+      .outer {
+        position: absolute;
+        background: linear-gradient(to left, #00c0fa, #2f95fa);
+        height: 12px;
+        border-radius: 8px;
+        transition: width 0.3s ease 0s;
+      }
+    }
+    .num {
+      width: 45px;
+      color: #ccc;
+      text-align: right;
+    }
+  }
+}

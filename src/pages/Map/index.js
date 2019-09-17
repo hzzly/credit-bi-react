@@ -7,19 +7,10 @@ import { genOverviewMap, genOverviewBar } from '@/utils/genMapData';
 
 import styles from './index.scss';
 
-@connect(({ map, app }) => ({
+@connect(({ map }) => ({
   map,
-  socket: app.socket,
 }))
 export default class index extends PureComponent {
-  componentDidMount() {
-    const { dispatch, socket } = this.props;
-    socket.emit('message');
-    socket.on('message', data => {
-      dispatch({ type: 'saveMap', payload: data });
-    });
-  }
-
   render() {
     const { map } = this.props;
     const { mapData, message } = map;

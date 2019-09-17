@@ -54,19 +54,10 @@ const loanLabel = [
   },
 ];
 
-@connect(({ loan, app }) => ({
+@connect(({ loan }) => ({
   loan,
-  socket: app.socket,
 }))
 export default class index extends PureComponent {
-  componentDidMount() {
-    const { dispatch, socket } = this.props;
-    socket.emit('loan');
-    socket.on('loan', data => {
-      dispatch({ type: 'saveLoan', payload: data });
-    });
-  }
-
   render() {
     const { loan } = this.props;
     const { overview, loanStatistical, ageStatistical, ageAverage } = loan;
