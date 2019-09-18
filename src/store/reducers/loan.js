@@ -1,8 +1,6 @@
 import { SAVE_LOAN } from '../types';
 
 const defaultState = {
-  // overview: {},
-  // loanStatistical: [],
   overview: {
     custCount: 0, // 客户数量
     loanCount: 0, // 贷款笔数
@@ -27,6 +25,13 @@ const defaultState = {
     age: [],
     average: [],
   },
+  userConver: {
+    regist: [],
+    real: [],
+    loan: [],
+  },
+  product: [],
+  cooperator: [],
 };
 
 export default (state = defaultState, action) => {

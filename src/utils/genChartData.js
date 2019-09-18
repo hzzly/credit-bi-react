@@ -1,7 +1,8 @@
 import echarts from 'echarts';
 
+const styles = 'display:inline-block;width:8px;height:8px;border-radius:4px;margin-right:6px;';
+
 export function genLoanStatistical(loan, labels) {
-  const styles = 'display:inline-block;width:8px;height:8px;border-radius:4px;margin-right:6px;';
   return {
     title: {
       text: '2019年贷款金额分布（万元）',
@@ -25,7 +26,7 @@ export function genLoanStatistical(loan, labels) {
               return value !== '-'
                 ? `
                 <p style="text-align:left;line-height:18px">
-                  <i class="chart-circle" style="${styles}background-color:${color}"></i>
+                  <i class="chart-circle" style="${styles}background-color:${color.colorStops[0].color}"></i>
                   ${seriesName}：${value}
                 </p>
               `
@@ -91,24 +92,41 @@ export function genLoanStatistical(loan, labels) {
       data: loan[k].map(t => t.value),
       itemStyle: {
         normal: {
-          color:
-            k.indexOf('balance') === -1
-              ? k.indexOf('pre') === -1
-                ? '#4F97F2'
-                : 'rgba(79,151,242,0.50)'
-              : k.indexOf('pre') === -1
-              ? '#76AB59'
-              : 'rgba(118,171,89,0.50)',
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: k.indexOf('balance') === -1 ? '#8bd46e' : '#248ff7',
+            },
+            {
+              offset: 1,
+              color: k.indexOf('balance') === -1 ? '#09bcb7' : '#6851f1',
+            },
+          ]),
+          barBorderRadius: 10,
           borderType: k.indexOf('pre') > -1 ? 'dashed' : 'solid',
-          borderColor: k.indexOf('balance') === -1 ? '#4F97F2' : '#76AB59',
+          // borderColor: k.indexOf('pre') === -1 && '#4F97F2',
+          opacity: k.indexOf('pre') > -1 ? '0.2' : '1',
         },
       },
+      // itemStyle: {
+      //   normal: {
+      //     color:
+      //       k.indexOf('balance') === -1
+      //         ? k.indexOf('pre') === -1
+      //           ? '#4F97F2'
+      //           : 'rgba(79,151,242,0.50)'
+      //         : k.indexOf('pre') === -1
+      //           ? '#76AB59'
+      //           : 'rgba(118,171,89,0.50)',
+      //     borderType: k.indexOf('pre') > -1 ? 'dashed' : 'solid',
+      //     borderColor: k.indexOf('balance') === -1 ? '#4F97F2' : '#76AB59',
+      //   },
+      // },
     })),
   };
 }
 
 export function genAgeStatistical(ages) {
-  const styles = 'display:inline-block;width:8px;height:8px;border-radius:4px;margin-right:6px;';
   return {
     title: {
       text: '贷款金额性别比例（万元）',
@@ -353,5 +371,406 @@ export function genAgeAverage(data) {
         data: data.age && data.age.map(t => t.value),
       },
     ],
+  };
+}
+
+export function genLoanProduct(data) {
+  const sortArr = data.sort((a, b) => b.loanCount - a.loanCount);
+  const remainSum = sortArr.slice(5, sortArr.length).reduce((prev, cur) => cur.loanCount + prev, 0);
+  const sum = sortArr.slice(0, 5).reduce((prev, cur) => cur.loanCount + prev, remainSum);
+  const newData = [
+    ...sortArr.slice(0, 5),
+    {
+      name: '其它',
+      value: remainSum,
+    },
+  ];
+  return {
+    title: {
+      text: sum,
+      subtext: '贷款笔数',
+      left: 'center',
+      top: '30%',
+      padding: [10, 0],
+      textStyle: {
+        color: '#ffc72b',
+        fontSize: 26,
+        align: 'center',
+      },
+      subtextStyle: {
+        color: '#fff',
+        fontSize: 12,
+        align: 'center',
+      },
+    },
+    tooltip: {
+      formatter: params => {
+        return `
+          <p style="text-align:left;line-height:18px">
+            <i class="chart-circle" style="${styles}background-color:${params.color}"></i>
+            ${params.name}
+          </p>
+          <p style="text-align:left;line-height:18px">
+            数量：${params.data.value}
+          </p>
+          <p style="text-align:left;line-height:18px">
+            占比：${params.percent}%
+          </p>
+        `;
+      },
+    },
+    legend: {
+      bottom: 0,
+      textStyle: {
+        color: '#fff',
+      },
+    },
+    series: [
+      {
+        name: '标题',
+        type: 'pie',
+        center: ['50%', '40%'],
+        radius: ['40%', '60%'],
+        minAngle: 10,
+        // clockwise: false, //饼图的扇区是否是顺时针排布
+        avoidLabelOverlap: false,
+        label: {
+          normal: {
+            show: true,
+            position: 'outter',
+            formatter(parms) {
+              return parms.data.legendname;
+            },
+          },
+        },
+        labelLine: {
+          normal: {
+            length: 5,
+            length2: 8,
+            smooth: true,
+          },
+        },
+        data: newData.map(k => ({
+          name: k.product || k.coopCust || k.name,
+          value: k.loanCount || k.value,
+        })),
+      },
+    ],
+  };
+}
+
+export function genUserConver(data, legends) {
+  let sum = 0;
+  const newData = Object.keys(data).map(item => {
+    const sumItem = data[item].reduce(
+      (prev, cur) => (cur.value !== '-' ? cur.value + prev : prev),
+      0
+    );
+    if (item === 'regist') {
+      sum = sumItem;
+    }
+    return {
+      name: legends[item].label,
+      value: sumItem,
+    };
+  });
+  // 富文本配置
+  const rich = {
+    yellow: {
+      color: '#ffc72b',
+      fontSize: 18,
+    },
+    white: {
+      color: '#fff',
+      fontSize: 12,
+    },
+  };
+  return {
+    calculable: true,
+    color: ['#8874a5', '#64609b', '#465192'],
+    series: [
+      {
+        name: '用户转化',
+        type: 'funnel',
+        left: 'center',
+        top: '10%',
+        bottom: '5%',
+        width: '70%',
+        minSize: '50%',
+        gap: 14,
+        label: {
+          normal: {
+            show: true,
+            position: 'center',
+            formatter: params => {
+              let percent = 0;
+              newData.forEach(value => {
+                if (params.name === value.name) {
+                  percent = (value.value / sum).toFixed(2) * 100;
+                }
+              });
+              return `{yellow| ${percent}}{white|%}\n{circle|}{white| ${params.name} }`;
+            },
+            rich,
+          },
+        },
+        itemStyle: {
+          normal: {
+            borderColor: '#fff',
+            borderWidth: 0,
+          },
+        },
+        data: [
+          {
+            value: 20,
+            name: newData[2].name,
+          },
+          {
+            value: 40,
+            name: newData[1].name,
+          },
+          {
+            value: 60,
+            name: newData[0].name,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function genUserConverLine(data, legends) {
+  return {
+    color: ['#8874a5', '#64609b', '#465192'],
+    tooltip: {
+      formatter: params => {
+        return `
+          <p style="text-align:left;font-size:12px;line-height:18px">${params[0].name}</p>
+          ${params
+            .map(({ color, seriesName, value }) => {
+              return value !== '-'
+                ? `
+                <p style="text-align:left;line-height:18px">
+                  <i class="chart-circle" style="${styles}background-color:${color}"></i>
+                  ${seriesName}：${value}
+                </p>
+              `
+                : null;
+            })
+            .join('')}
+        `;
+      },
+    },
+    grid: {
+      top: '20px',
+      left: '0',
+      right: '0',
+      bottom: '0',
+      containLabel: true,
+    },
+    xAxis: {
+      data: data.regist && data.regist.map(t => `${t.date}月`),
+    },
+    yAxis: {
+      splitLine: {
+        lineStyle: {
+          color: 'rgba(168, 178, 185, .1)',
+        },
+      },
+    },
+    // legend: {
+    //   icon: 'rect',
+    //   itemWidth: 14,
+    //   itemHeight: 5,
+    //   itemGap: 13,
+    //   data: ['男性', '女性'],
+    //   right: '4%',
+    //   top: 25,
+    //   textStyle: {
+    //     fontSize: 12,
+    //     color: '#ccc',
+    //   },
+    // },
+    series: Object.keys(data).map(k => ({
+      name: legends[k].label,
+      data: data[k].map(t => t.value),
+      smooth: false,
+    })),
+  };
+}
+
+export function genEquipment(data) {
+  const yCategory = [];
+  const series = [];
+  const sum = data.reduce((prev, cur) => cur.value + prev, 0);
+  data.forEach((item, i) => {
+    series.push({
+      name: '设置分布',
+      type: 'pie',
+      clockWise: false, // 顺时加载
+      hoverAnimation: false, // 鼠标移入变大
+      radius: [`${75 - i * 15}%`, `${66 - i * 15}%`],
+      center: ['35%', '55%'],
+      label: {
+        show: false,
+      },
+      itemStyle: {
+        label: {
+          show: false,
+        },
+        labelLine: {
+          show: false,
+        },
+        borderWidth: 5,
+      },
+      data: [
+        {
+          value: item.value,
+          name: item.name,
+        },
+        {
+          value: (sum * 4) / 3 - item.value,
+          name: '',
+          itemStyle: {
+            color: 'rgba(0,0,0,0)',
+            borderWidth: 0,
+          },
+          tooltip: {
+            show: false,
+          },
+          hoverAnimation: false,
+        },
+      ],
+    });
+    series.push({
+      name: '',
+      type: 'pie',
+      silent: true,
+      z: 1,
+      clockWise: false, // 顺时加载
+      hoverAnimation: false, // 鼠标移入变大
+      radius: [`${75 - i * 15}%`, `${66 - i * 15}%`],
+      center: ['35%', '55%'],
+      label: {
+        show: false,
+      },
+      itemStyle: {
+        label: {
+          show: false,
+        },
+        labelLine: {
+          show: false,
+        },
+        borderWidth: 5,
+      },
+      data: [
+        {
+          value: 7.5,
+          itemStyle: {
+            color: 'rgba(151, 136, 136, .4)',
+            borderWidth: 0,
+          },
+          tooltip: {
+            show: false,
+          },
+          hoverAnimation: false,
+        },
+        {
+          value: 2.5,
+          name: '',
+          itemStyle: {
+            color: 'rgba(0,0,0,0)',
+            borderWidth: 0,
+          },
+          tooltip: {
+            show: false,
+          },
+          hoverAnimation: false,
+        },
+      ],
+    });
+    yCategory.push(`${((item.value / sum) * 100).toFixed(2)}%`);
+  });
+  return {
+    color: ['#FF8700', '#ffc300', '#00e473', '#009DFF'],
+    tooltip: {
+      formatter: params => {
+        return `
+          <p style="text-align:left;line-height:18px">
+            <i class="chart-circle" style="${styles}background-color:${params.color}"></i>
+            ${params.name}
+          </p>
+          <p style="text-align:left;line-height:18px">
+            数量：${params.data.value}
+          </p>
+          <p style="text-align:left;line-height:18px">
+            占比：${params.percent}%
+          </p>
+        `;
+      },
+    },
+    grid: {
+      top: '15%',
+      bottom: '53%',
+      left: '35%',
+      containLabel: false,
+    },
+    legend: {
+      show: true,
+      top: '20%',
+      left: '65%',
+      data: data.map(k => k.name),
+      itemWidth: 22,
+      itemHeight: 12,
+      itemGap: 10,
+      formatter: name => {
+        const item = data.find(k => k.name === name);
+        return `{title| ${name}}\n{value| ${item.value} 人}`;
+      },
+      textStyle: {
+        rich: {
+          title: {
+            fontSize: 10,
+            lineHeight: 10,
+            color: '#ccc',
+            // color: "rgba(0,0,0,.45)"
+          },
+          value: {
+            fontSize: 14,
+            lineHeight: 18,
+            color: '#fff',
+            // color: "rgba(0,0,0,.85)"
+          },
+        },
+      },
+    },
+    yAxis: [
+      {
+        type: 'category',
+        inverse: true,
+        axisLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          interval: 0,
+          inside: true,
+          textStyle: {
+            color: '#eee',
+            fontSize: 10,
+          },
+          show: true,
+        },
+        data: yCategory,
+      },
+    ],
+    xAxis: [
+      {
+        show: false,
+      },
+    ],
+    series,
   };
 }

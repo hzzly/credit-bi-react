@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { socket } from './utils/socket';
 import { AppContainer } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { socket } from './utils/socket';
 import { SAVE_LOAN, SAVE_MAP } from './store/types';
 import Router from './router';
 import configStore from './store';
