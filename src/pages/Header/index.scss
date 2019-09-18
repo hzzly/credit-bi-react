@@ -1,0 +1,34 @@
+.header {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../../assets/imgs/line1.png') no-repeat bottom center;
+  .time {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    font-size: 26px;
+    transform: translateY(-50%);
+    .timeIcon {
+      margin-right: 8px;
+      color: #0bbcfa;
+    }
+  }
+  .title {
+    font-size: 34px;
+    margin-bottom: 8px;
+    background: url('../../assets/imgs/line2.png') no-repeat bottom center;
+  }
+  .desc {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    color: #77fbe3;
+    transform: translateY(-50%);
+    .setIcon {
+      margin-right: 8px;
+    }
+  }
+}
