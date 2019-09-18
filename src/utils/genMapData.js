@@ -1,9 +1,11 @@
-// import { convertData } from './util';
 let i = 0;
 const effectScatterSeries = effectScatter();
 
 export function genOverviewMap(cmap, message) {
-  const max = cmap.sort((a, b) => b.value - a.value);
+  const sortData = cmap.sort((a, b) => b.value - a.value);
+  const max = (sortData[0] && sortData[0].value.toFixed(2)) || 100;
+  const min =
+    (sortData[sortData.length - 1] && sortData[sortData.length - 1].value.toFixed(0)) || 0;
   effectScatterSeries[i] = {
     ...effectScatterSeries[i],
     data: [
@@ -20,18 +22,17 @@ export function genOverviewMap(cmap, message) {
   return {
     visualMap: {
       type: 'continuous',
-      min: 0,
-      max: max[0] && max[0].value.toFixed(2),
+      min: Number(min),
+      max: Number(max),
       left: 'center',
       bottom: '30',
       orient: 'horizontal',
       itemWidth: 15,
       itemHeight: 200,
-      text: [max[0] && max[0].value.toFixed(2), 0],
+      text: [max, min],
       inRange: {
         color: ['#345f7b', '#081523'], // 蓝绿
       },
-      // color: ['#04387b', '#467bc0'],
       textStyle: {
         color: '#999',
       },
