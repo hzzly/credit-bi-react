@@ -7,8 +7,9 @@
   padding: 14px;
   // overflow: hidden;
   .head {
-    // display: flex;
-    // justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 18px;
     .title {
       position: relative;
