@@ -1,0 +1,48 @@
+module.exports = function userConver() {
+  return {
+    userConver: {
+      regist: [
+        { date: '1', value: 780 },
+        { date: '2', value: 1040 },
+        { date: '3', value: 1890 },
+        { date: '4', value: 2423 },
+        { date: '5', value: 3963 },
+        { date: '6', value: 5889 },
+        { date: '7', value: 8380 },
+        { date: '8', value: 11890 },
+        { date: '9', value: 14695 },
+        { date: '10', value: '-' },
+        { date: '11', value: '-' },
+        { date: '12', value: '-' },
+      ],
+      real: [
+        { date: '1', value: 580 },
+        { date: '2', value: 640 },
+        { date: '3', value: 1190 },
+        { date: '4', value: 1423 },
+        { date: '5', value: 2563 },
+        { date: '6', value: 3489 },
+        { date: '7', value: 5080 },
+        { date: '8', value: 7990 },
+        { date: '9', value: 8695 },
+        { date: '10', value: '-' },
+        { date: '11', value: '-' },
+        { date: '12', value: '-' },
+      ],
+      loan: [
+        { date: '1', value: 310 },
+        { date: '2', value: 440 },
+        { date: '3', value: 990 },
+        { date: '4', value: 1423 },
+        { date: '5', value: 2063 },
+        { date: '6', value: 2889 },
+        { date: '7', value: 3980 },
+        { date: '8', value: 5890 },
+        { date: '9', value: 7695 },
+        { date: '10', value: '-' },
+        { date: '11', value: '-' },
+        { date: '12', value: '-' },
+      ],
+    },
+  };
+};

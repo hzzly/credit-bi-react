@@ -32,6 +32,8 @@ const defaultState = {
   },
   product: [],
   cooperator: [],
+  equipment: [],
+  channel: [],
 };
 
 export default (state = defaultState, action) => {

@@ -27,24 +27,10 @@ const legends = {
   },
 };
 
-@connect(({ loan, app }) => ({
+@connect(({ loan }) => ({
   loan,
-  socket: app.socket,
 }))
 export default class index extends PureComponent {
-  componentDidMount() {
-    // const { dispatch, socket } = this.props;
-    // socket.emit('userConver');
-    // socket.on('userConver', data => {
-    //   dispatch({
-    //     type: 'saveLoan',
-    //     payload: {
-    //       userConver: data
-    //     }
-    //   });
-    // });
-  }
-
   render() {
     const { loan } = this.props;
     const { userConver } = loan;

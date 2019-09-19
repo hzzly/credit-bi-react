@@ -18,6 +18,7 @@ socket.init({
     socket.wsEmit({ name: 'userConver' });
     socket.wsEmit({ name: 'product' });
     socket.wsEmit({ name: 'cooperator' });
+    socket.wsEmit({ name: 'equipment' });
   },
   onReceiveMsg: data => {
     const contentTypeMap = {
@@ -26,6 +27,7 @@ socket.init({
       userConver: SAVE_LOAN,
       product: SAVE_LOAN,
       cooperator: SAVE_LOAN,
+      equipment: SAVE_LOAN,
     };
 
     const action = contentTypeMap[data.contentType];

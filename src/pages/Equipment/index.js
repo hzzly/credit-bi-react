@@ -33,52 +33,13 @@ const legends = {
   },
 };
 
-@connect(({ loan, app }) => ({
+@connect(({ loan }) => ({
   loan,
-  socket: app.socket,
 }))
 export default class index extends PureComponent {
-  componentDidMount() {
-    // const { dispatch, socket } = this.props;
-    // socket.emit('userConver');
-    // socket.on('userConver', data => {
-    //   dispatch({
-    //     type: 'saveLoan',
-    //     payload: {
-    //       userConver: data
-    //     }
-    //   });
-    // });
-  }
-
   render() {
-    // const { loan } = this.props;
-    // const { channel } = loan;
-    const equipment = [
-      {
-        name: 'PC',
-        value: 10211,
-      },
-      {
-        name: 'Android',
-        value: 6111,
-      },
-      {
-        name: 'Iphone',
-        value: 7711,
-      },
-      {
-        name: '其他',
-        value: 3711,
-      },
-    ];
-
-    const channel = [
-      { name: '合作方', value: 9400 },
-      { name: '核算', value: 7400 },
-      { name: '自营', value: 5400 },
-      { name: '其它', value: 3400 },
-    ];
+    const { loan } = this.props;
+    const { equipment, channel } = loan;
 
     const equipmentData = genEquipment(equipment, legends);
     const channelData = calculate(channel);
