@@ -19,7 +19,7 @@ yarn start
 
 下面是本人针对这个数据大屏需求前期做的一些探索实践，数据也是mock的。
 
-![bi](https://raw.githubusercontent.com/hzzly/hzzly.github.io/master/images/bi/img2.gif)
+![bi](https://hzzlyxx.oss-cn-beijing.aliyuncs.com/blog/bi/img2.gif)
 
 
 ## 技术选型
@@ -61,7 +61,7 @@ yarn start
 
 安利一个grid 布局可视化设计工具 -- [CSS Grid Generator](https://cssgrid-generator.netlify.com/)。可以使用它生成对应的代码，帮助咱们快速布局。
 
-![grid](https://raw.githubusercontent.com/hzzly/hzzly.github.io/master/images/bi/img2.png)
+![grid](https://hzzlyxx.oss-cn-beijing.aliyuncs.com/blog/bi/img2.png)
 
 ### 项目结构
 
